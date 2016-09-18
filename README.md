@@ -98,13 +98,26 @@ return [
 
 ### Migration
 
-you need open your console and then please follow code below 
+Migration is simple inject your database using default data including for grid. You need open your console and then please follow code below 
 
 ```shell
 yii migrate
 ```
 
+### Go to your browser
+
+Open your browser and go to your url for example "http://localhost/basic/web/". Username for default is "admin" and password "123456".
+
+### RBAC
+
+if you have done generate table using this generator "DIESEL CRUD Generator", you need checked each "ROLE" you defined.
+Default Role in table "role" is "Admin" then add more role in mysql table role as you wish.
+You can check/unchecked role at menu "Setting - Access Role" or "http://localhost/basic/web/role"
+
+
+
 **NOTES:**
 - Yii won't create the database for you, this has to be done manually before you can access it.
 - Check and edit the other files in the `config/` directory to customize your application as required.
 - Refer to the README in the `tests` directory for information specific to basic application tests.
+- Happy Coding
