@@ -1,14 +1,14 @@
 {
-    "name": "yiisoft/yii2-basic9",
+    "name": "sintret/yii2-basic-easy",
     "description": "Yii 2 Basic Project Template with customize",
     "keywords": ["yii2", "framework", "basic", "project template"],
     "homepage": "https://sintret.com",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/sintret/yii2-basic9/issues?state=open",
-        "wiki": "https://github.com/sintret/yii2-basic9/wiki/",
-        "source": "https://github.com/sintret/yii2-basic9"
+        "issues": "https://github.com/sintret/yii2-basic-easy/issues?state=open",
+        "wiki": "https://github.com/sintret/yii2-basic-easy/wiki/",
+        "source": "https://github.com/sintret/yii2-basic-easy"
     },
     "require": {
         "php": ">=5.4.0",
