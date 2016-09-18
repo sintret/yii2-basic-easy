@@ -96,6 +96,14 @@ return [
 ];
 ```
 
+### Migration
+
+you need open your console and then please follow code below 
+
+```php
+yii migrate
+```
+
 **NOTES:**
 - Yii won't create the database for you, this has to be done manually before you can access it.
 - Check and edit the other files in the `config/` directory to customize your application as required.
