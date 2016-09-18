@@ -28,4 +28,7 @@ phpunit.phar
 /phpunit.xml
 
 #additional ignore
+/web/xls/*
+/web/xls_parsing/*
+/web/xls_sample/*
 composer.lock
