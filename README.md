@@ -100,7 +100,7 @@ return [
 
 you need open your console and then please follow code below 
 
-```php
+```shell
 yii migrate
 ```
 
