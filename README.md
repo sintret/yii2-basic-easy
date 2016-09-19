@@ -66,9 +66,10 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 You can then install this project template using the following command:
 
 ~~~
-php composer.phar global require "fxp/composer-asset-plugin:~1.1.1"
-php composer.phar create-project --prefer-dist sintret/yii2-basic-easy basic
-
+//php composer.phar global require "fxp/composer-asset-plugin:~1.2.0"
+composer global require "fxp/composer-asset-plugin:^1.2.0"
+//php composer.phar create-project --prefer-dist sintret/yii2-basic-easy basic
+composer create-project --prefer-dist sintret/yii2-basic-easy basic
 ~~~
 
 Now you should be able to access the application through the following URL, assuming `basic` is the directory
