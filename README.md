@@ -113,6 +113,14 @@ if you have done generate table using this generator "DIESEL CRUD Generator", yo
 Default Role in table "role" is "Admin" then add more role in mysql table role as you wish.
 You can check/unchecked role at menu "Setting - Access Role" or "http://localhost/basic/web/role"
 
+### Audit Trail
+
+Audit Trail for a mysql table when you have defined fields in mysql table like "userCreate, userUpdate, createDate, updateDate".
+
+### Image Processing
+
+Default image proccessing using GD Library but you can change priority with optional gmacick or imagick in folder components SintretImagine class.
+Default for mysql field name is "image".
 
 
 **NOTES:**
