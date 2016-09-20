@@ -76,16 +76,11 @@ class TblDynagrid extends \yii\db\ActiveRecord {
 
         $affix = $userId . '_' . $userId;
 
-        $return['Location' . $affix] = '{"page":"50","theme":"panel-primary","keys":["7b6b4a62","25412442","3d65576e","fc0227ba","f237cb47"],"filter":"","sort":""}';
-        $return['Klas' . $affix] = '{"page":"50","theme":"panel-primary","keys":["7b6b4a62","25412442","78f67f03"],"filter":"","sort":""}';
-        //$return['Asset' . $affix] = '{"page":"50","theme":"panel-primary","keys":["7b6b4a62","25412442","fc0227ba","acf6ecd6","f237cb47","4a16cdfb"],"filter":"","sort":""}';
-        $return['Asset' . $affix] = '{"page":"50","theme":"panel-primary","keys":["7b6b4a62","25412442","d33fb1f4","fc0227ba","acf6ecd6","4a16cdfb"],"filter":"","sort":""}';
-        $return['SparePart' . $affix] = '{"page":"50","theme":"panel-danger","keys":["7b6b4a62","25412442","acf6ecd6","fc0227ba","9a4a2ba4","99bd34fe","999f019a","fb233ea5","245192a2","4a16cdfb"],"filter":"","sort":""}';
-        $return['SubClass' . $affix] = '{"page":"50","theme":"panel-primary","keys":["7b6b4a62","25412442","42bfd9ea"],"filter":"","sort":""}';
-        $return['Unit' . $affix] = '{"page":"50","theme":"panel-default","keys":["7b6b4a62","25412442","fc0227ba"],"filter":"","sort":""}';
-        //$return['WorkRequest' . $affix] = '{"page":"50","theme":"panel-success","keys":["7b6b4a62","03239679","e170572e","ec489d1d","6f4cf3ff","4a16cdfb","c1fac919","d17677bd","8bc445cc"],"filter":"","sort":""}';
-        $return['WorkRequest' . $affix] = '{"page":"50","theme":"panel-success","keys":["7b6b4a62","fc0227ba","03239679","e170572e","6f4cf3ff","4a16cdfb","c1fac919","d17677bd","8bc445cc"],"filter":"","sort":""}';
-
+        //$return['Kabupaten' . $affix] = '{"page":"100","theme":"panel-default","keys":["e04112b1","7a87b836","78f67f03","7b6b4a62"],"filter":"","sort":""}';
+        //$return['Kecamatan' . $affix] = '{"page":"100","theme":"panel-default","keys":["5c18e243","e04112b1","7a87b836","78f67f03","7b6b4a62"],"filter":"","sort":""}';    
+        //$return['Category' . $affix] = '{"page":"100","theme":"panel-default","keys":["e04112b1","7a87b836","78f67f03","7b6b4a62"],"filter":"","sort":""}';
+        $return['Desa' . $affix] = '{"page":"100","theme":"panel-default","keys":["51d4c9e2","8a6dce69","e04112b1","4e2a8076","7a87b836","7b6b4a62"],"filter":"","sort":""}';
+   
         return $return;
     }
 
@@ -94,8 +89,9 @@ class TblDynagrid extends \yii\db\ActiveRecord {
         $array = self::buildGrid($userId);
 
         foreach ($array as $k => $v) {
-
-            $model = static::findOne($k);
+            
+            
+            $model = static::find()->where(['id' => $k])->one();
             if ($model->id) {
                 $model->data = $v;
                 $model->save();

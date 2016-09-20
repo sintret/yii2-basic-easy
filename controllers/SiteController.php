@@ -231,5 +231,23 @@ class SiteController extends Controller {
                     'active' => $active
         ]);
     }
+    
+    public function actionSignup() {
+        $this->layout = 'main-login';
+        $model = new \app\models\SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    //Yii::$app->session->setFlash('success', 'Thank you for register. We will respond to you as soon as possible.');
+                    //return $this->goHome();
+                }
+                return $this->redirect('login');
+            }
+        }
+
+        return $this->render('signup', [
+                    'model' => $model,
+        ]);
+    }
 
 }

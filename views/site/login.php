@@ -22,7 +22,7 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Yii2</b> Basic9</a>
+        <a href="#"><b>Yii2</b> Basic Easy</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -63,8 +63,8 @@ $fieldOptions2 = [
         </div>-->
         <!-- /.social-auth-links -->
 
-        <a href="<?php echo Url::to(['site/forgot_password']);?>">I forgot my password</a><br>
-<!--        <a href="<?php echo Url::to(['site/signup']);?>" class="text-center">Register a new membership</a>-->
+        <a href="<?php echo Url::to(['site/signup']);?>" >Register a new membership</a>
+        <a href="<?php echo Url::to(['site/forgot_password']);?>" class="pull-right">I forgot my password</a><br>
 
     </div>
     <!-- /.login-box-body -->
