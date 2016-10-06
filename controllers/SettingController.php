@@ -109,17 +109,9 @@ class SettingController extends \sintret\diesel\controllers\Controller {
      */
     public function actionUpdate()
     {
-
         $model = $this->findModel(1);
-        $approval = str_replace(",", "", $_POST['Setting']['approval']);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if ($approval) {
-                $model->approval = $approval;
-                $model->update();
-
-                FirebaseController::approval($id, $approval);
-            }
             Yii::$app->session->setFlash('success', 'Well done! successfully to update data!  ');
             return $this->redirect(['update', 'id' => $id]);
         } else {

@@ -3,7 +3,7 @@
 
 use yii\helpers\Url;
 
-$this->title = $settings->applicationName . ' - Dashboard';
+$this->title = Yii::$app->name .' - Dashboard';
 //$this->registerCssFile(Yii::$app->request->baseUrl . '/css/xenon-components.css');
 //$this->registerCssFile(Yii::$app->request->baseUrl . '/css/fonts/linecons/css/linecons.css');
 $this->registerCssFile('//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css');

@@ -11,6 +11,7 @@ use app\models\User;
 
 $this->title = 'Log Uploads';
 $this->params['breadcrumbs'][] = $this->title;
+$date = date("YmdHis");
 ?>
 <div class="log-upload-index">
 
@@ -113,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             DynaGrid::end();
             ?> </div>
-            <?php $this->registerJs('$("#deleteSelected").on("click",function(){
+        <?php $this->registerJs('$("#deleteSelected").on("click",function(){
 var array = "";
 $(".simple").each(function(index){
     if($(this).prop("checked")){

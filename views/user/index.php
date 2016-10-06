@@ -11,6 +11,7 @@ use app\models\User;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
+$date = date("YmdHis");
 ?>
 <div class="user-index">
 

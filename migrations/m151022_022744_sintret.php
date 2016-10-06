@@ -94,6 +94,11 @@ class m151022_022744_sintret extends Migration {
             'controller' => 'log-upload',
             'method' => 'index'
         ]);
+        $this->insert('access', [
+            'roleId' => 1,
+            'controller' => 'log-upload',
+            'method' => 'view'
+        ]);
 
         $this->createTable('chat', [
             'id' => $this->primaryKey(),
