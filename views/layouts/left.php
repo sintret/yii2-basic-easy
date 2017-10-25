@@ -1,6 +1,8 @@
 <?php
 
 use yii\bootstrap\Nav;
+
+$paramsRole = app\controllers\BaseController::getParams(Yii::$app->user->identity->roleId);
 ?>
 <aside class="main-sidebar">
 
@@ -54,8 +56,8 @@ use yii\bootstrap\Nav;
                 ]
         );
         ?>
-        
-        <?php if (sintret\diesel\controllers\Controller::checkAccess("report.index", Yii::$app->user->identity->roleId)) { ?>
+
+        <?php if (app\controllers\BaseController::checkAccess("report", "index", Yii::$app->user->identity->roleId, $paramsRole)) { ?>
             <ul class="sidebar-menu">
                 <li class="treeview">
                     <a href="<?= \yii\helpers\Url::to(['/report']) ?>">
@@ -64,8 +66,8 @@ use yii\bootstrap\Nav;
                 </li>
             </ul>
         <?php } ?>
-        
-          <?php if (sintret\diesel\controllers\Controller::checkAccess("user.index", Yii::$app->user->identity->roleId)) { ?>
+
+        <?php if (app\controllers\BaseController::checkAccess("user", "index", Yii::$app->user->identity->roleId, $paramsRole)) { ?>
             <ul class="sidebar-menu">
                 <li class="treeview">
                     <a href="<?= \yii\helpers\Url::to(['/user']) ?>">
@@ -75,7 +77,7 @@ use yii\bootstrap\Nav;
             </ul>
         <?php } ?>
 
-        <?php if (sintret\diesel\controllers\Controller::checkManyAccess(['setting.index', 'role.index'], Yii::$app->user->identity->roleId)) { ?>
+        <?php if (app\controllers\BaseController::checkManyAccess(['setting.index', 'role.index'], Yii::$app->user->identity->roleId, $paramsRole)) { ?>
             <ul class="sidebar-menu">
                 <li class="treeview">
                     <a href="#">
@@ -83,16 +85,16 @@ use yii\bootstrap\Nav;
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <?php if (sintret\diesel\controllers\Controller::checkAccess("setting.index", Yii::$app->user->identity->roleId)) { ?>
+                        <?php if (app\controllers\BaseController::checkAccess("setting", "index", Yii::$app->user->identity->roleId, $paramsRole)) { ?>
                             <li><a href="<?= \yii\helpers\Url::to(['/setting/update', 'id' => 1]) ?>"><span class="fa fa-cog"></span> General</a>
                             </li>
                         <?php } ?>
-                        <?php if (sintret\diesel\controllers\Controller::checkAccess("role.index", Yii::$app->user->identity->roleId)) { ?>
+                        <?php if (app\controllers\BaseController::checkAccess("role","index", Yii::$app->user->identity->roleId, $paramsRole)) { ?>
                             <li><a href="<?= \yii\helpers\Url::to(['/role']) ?>"><span class="fa fa-unlock-alt"></span> Access Role</a>
                             </li>
                         <?php } ?>
                         <li><a href="<?= \yii\helpers\Url::to(['/log-upload']) ?>"><span class="fa fa-life-saver"></span> Log</a>
-<!--                        <li><a href="<?= \yii\helpers\Url::to(['/debug']) ?>"><span class="fa fa-wrench"></span> Debug</a>-->
+                        <li><a href="<?= \yii\helpers\Url::to(['/gii']) ?>"><span class="fa fa-bath"></span> Gii</a>
                         </li>
                     </ul>
                 </li>

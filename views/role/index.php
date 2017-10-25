@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 
-$this->registerJsFile('js/checkall.js', ['position' => \yii\web\View::POS_BEGIN]);
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/checkall.js', ['depends' => [app\assets\AppAsset::className()]]);
 
 
 /* @var $this yii\web\View */
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
         $form = ActiveForm::begin([
                     'type' => ActiveForm::TYPE_HORIZONTAL,
-                    'options' => ['enctype' => 'multipart/form-data']   // important, needed for file upload
+                        //'options' => ['enctype' => 'multipart/form-data']   // important, needed for file upload
         ]);
         ?>
     </div>
@@ -46,17 +46,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 foreach ($methods as $method) {
                     $name = "Roles[$controller][$method]";
                     $elementId = $method;
-                    $access = \app\models\Access::find()->where([
-                                'roleId' => $roleId,
-                                'controller' => $controller,
-                                'method' => $method])->exists();
+
+                    $access = false;
+
+                    if (isset($params[$controller][$method])) {
+                        $access = true;
+                    }
+
 
                     if ($access)
                         $checked = ' checked="checked" ';
                     else
                         $checked = '';
 
-                    echo '<td> <input type="checkbox" name="' . $name . '" id="' . $elementId . '" ' . $checked . '  title="Role for ' . $controller . ' ' . $method . '" /> </td>';
+                    echo '<td> <input type="checkbox" name="' . $name . '" class="' . $elementId . '" ' . $checked . '  title="Role for ' . $controller . ' ' . $method . '" /> </td>';
                 }
                 ?>
             </tr>
