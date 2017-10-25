@@ -42,76 +42,7 @@ class m151022_022744_sintret extends Migration {
             'createDate' => date("Y-m-d"),
             'updateDate' => $this->timestamp()->notNull()
         ]);
-
-        $this->createTable('role', [
-            'id' => $this->primaryKey(),
-            'name' => $this->string()
-        ]);
-
-        $this->insert('role', [
-            'name' => 'Admin'
-        ]);
-
-        $this->createTable('access', [
-            'id' => $this->primaryKey(),
-            'roleId' => $this->integer(11),
-            'controller' => $this->string(128),
-            'method' => $this->string(128),
-        ]);
-
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'role',
-            'method' => 'index'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'user',
-            'method' => 'index'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'user',
-            'method' => 'update'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'user',
-            'method' => 'view'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'setting',
-            'method' => 'index'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'setting',
-            'method' => 'update'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'log-upload',
-            'method' => 'index'
-        ]);
-        $this->insert('access', [
-            'roleId' => 1,
-            'controller' => 'log-upload',
-            'method' => 'view'
-        ]);
-
-        $this->createTable('chat', [
-            'id' => $this->primaryKey(),
-            'userId' => $this->integer()->notNull(),
-            'message' => $this->text(),
-            'updateDate' => $this->timestamp()->notNull(),
-        ]);
-
-        $this->insert('chat', [
-            'userId' => 1,
-            'message' => '@admin this is content, with mention you can push notification via email with send grid conf in menu settings',
-        ]);
-
+        
         $this->createTable('log_upload', [
             'id' => $this->primaryKey(),
             'userId' => $this->integer(),
@@ -201,6 +132,21 @@ class m151022_022744_sintret extends Migration {
             'emailAdmin' => 'your_email@gmail.com',
             'emailSupport' => 'your_email@gmail.com',
             'emailOrder' => 'your_email@gmail.com',
+        ]);
+        
+        $this->createTable('role', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(),
+            'params' => $this->text()
+        ]);
+
+        $this->insert('role', [
+            'name' => 'Admin',
+            'params'=>'{"log-upload":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on","delete":"on","delete-all":"on"},"notification":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on","delete":"on","delete-all":"on"},"role":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on","delete":"on","delete-all":"on"},"setting":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on","delete":"on","delete-all":"on"},"user":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on","delete":"on","delete-all":"on"}}'
+        ]);
+        $this->insert('role', [
+            'name' => 'Editor',
+            'params'=>'{"log-upload":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on"},"notification":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on"},"role":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on"},"setting":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on"},"user":{"create":"on","update":"on","index":"on","view":"on","parsing-log":"on","excel":"on","parsing":"on","sample":"on"}}'
         ]);
     }
 

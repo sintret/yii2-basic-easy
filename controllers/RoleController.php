@@ -4,42 +4,17 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Role;
-use app\models\RoleSearch;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use sintret\gii\models\LogUpload;
-use sintret\gii\components\Util;
+use yii\web\Controller;
 
 /**
  * RoleController implements the CRUD actions for Role model.
  */
-class RoleController extends \sintret\diesel\controllers\Controller {
+class RoleController extends BaseController {
 
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@']
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $methods = Role::$methods;
         $fields = Role::accessFilter();
         $controllers = Role::controllers();
@@ -48,30 +23,23 @@ class RoleController extends \sintret\diesel\controllers\Controller {
         $model = $this->findModel($roleId);
         $model->role_name = $roleId;
 
-        $sql = '';
 
-        //echo '<pre>';print_r($_POST['Roles']); exit(0);
         if ($model->load(Yii::$app->request->post())) {
-            \app\models\Access::deleteAll('roleId = :roleId', [':roleId' => $roleId]);
-            foreach ($_POST['Roles'] as $keys => $values) {
-                foreach ($values as $k => $v) {
-                    //if($v=='on')
-                    $sql .= ' INSERT INTO access (roleId,controller,method) values ("' . $roleId . '","' . $keys . '","' . $k . '"); ';
-                }
-            }
+            $model->params = \yii\helpers\Json::encode($_POST['Roles']);
+            $model->save();
 
-            if ($sql) {
-                Yii::$app->db->createCommand($sql)->execute();
-                Yii::$app->session->setFlash('success', 'Successfully, Update access role!');
-            }
+
+            Yii::$app->session->setFlash('success', 'Successfully, Update access role!');
         }
 
+        $params = empty($model->params) ? NULL : \yii\helpers\Json::decode($model->params);
         return $this->render('index', [
                     'model' => $model,
                     'methods' => $methods,
                     'fields' => $fields,
                     'controllers' => $controllers,
-                    'roleId' => $roleId
+                    'roleId' => $roleId,
+                    'params' => $params
         ]);
     }
 
@@ -80,8 +48,7 @@ class RoleController extends \sintret\diesel\controllers\Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
                     'model' => $this->findModel($id),
         ]);
@@ -92,8 +59,7 @@ class RoleController extends \sintret\diesel\controllers\Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Role();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -112,8 +78,7 @@ class RoleController extends \sintret\diesel\controllers\Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -132,8 +97,7 @@ class RoleController extends \sintret\diesel\controllers\Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
         Yii::$app->session->setFlash('success', 'Well done! successfully to deleted data!  ');
 
@@ -147,8 +111,7 @@ class RoleController extends \sintret\diesel\controllers\Controller {
      * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Role::findOne($id)) !== null) {
             return $model;
         } else {
